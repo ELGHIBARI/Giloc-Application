@@ -16,8 +16,15 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+    <style>.btn-orange{background-color: #bc3906;
+                       color : white;
+    }</style>
+    @yield('head')
+
 </head>
 
 <body>
@@ -35,19 +42,15 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         @auth
-                        @if(Auth::user()->role=="partenaire") 
+                        @if(Auth::user()->role=="partenaire")
+                        <li> 
+                            @php $id=Auth::user()->id
+                            @endphp
+                            <a class="nav-link" href="{{url('/annonces/'.$id.'')}}">Annonces</a>
+                            
+                        </li>
                         <li>
-                            <a d="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>{{ __('Annonces') }}</a>
-                            <div class="dropdown-menu dropdown-menu-end " aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-right" href="{{ url('/annonce/create') }}" onclick="event.preventDefault();
-                                                     document.getElementById('add-annonce-form').submit();">
-                                    Ajouter une annonce
-                                </a>
-
-                                <form id="add-annonce-form" action="{{ url('/annonce/create')  }}" method="GET" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
+                            <a class="nav-link" href="{{ url('/demandes/'.$id.'') }}">Demandes</a>
                         </li>
                         @endif
                         @endauth
@@ -69,6 +72,15 @@
                         </li>
                         @endif
                         @else
+                        @auth
+                        @if(Auth::user()->role=="partenaire")
+                        <li class="nav-item">
+                            <a class="btn btn-orange"  href="{{ url('/annonce/create') }}">
+                            Ajouter annonce
+                            </a>
+                        </li>
+                        @endif
+                        @endauth
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ Auth::user()->nom_complet }}
@@ -95,7 +107,6 @@
             @yield('content')
         </main>
     </div>
-    <script src= "{{ asset('js/jquery.min.js') }}" ></script>
 </body>
 
 </html>

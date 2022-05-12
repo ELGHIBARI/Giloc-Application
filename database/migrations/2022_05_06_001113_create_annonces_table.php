@@ -16,18 +16,20 @@ class CreateAnnoncesTable extends Migration
         Schema::create('annonces', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titre');
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
             $table->string('prix_par_jour')->nullable();
             $table->date('date_desponibilite')->nullable();
             $table->integer('disponible');
             $table->string('ville');
             $table->integer('premium');
             $table->string('duree_premium');
-            $table->integer('etat');
+            $table->string('etat');
             $table->integer('user_id')->unsigned();
+            $table->integer('vehicule_id');
             $table->string('type_vehicule');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');
+
         });
     }
 

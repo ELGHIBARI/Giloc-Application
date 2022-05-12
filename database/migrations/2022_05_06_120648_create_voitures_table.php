@@ -17,10 +17,11 @@ class CreateVoituresTable extends Migration
             $table->increments('id');
             $table->string('marque');
             $table->string('modele');
-            $table->year('annee_modele');
-            $table->string('Type de carburant');
-            $table->string('Puissance fiscale');
+            $table->string('annee_modele');
+            $table->string('Type_carburant');
+            $table->string('Puissance_fiscale');
             $table->integer('nombre_places');
+            $table->longText('images_voiture');
             $table->timestamps();
         });
     }

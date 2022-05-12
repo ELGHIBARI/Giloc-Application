@@ -15,11 +15,13 @@ class CreateMotosTable extends Migration
     {
         Schema::create('motos', function (Blueprint $table) {
             $table->increments('id');
-            $table->year('Année_Modèle');
+            $table->string('Annee_Modele');
+            $table->string('modele');
             $table->integer('Nombre_roues');
-            $table->string('marque`');
+            $table->string('marque');
             $table->string('Cylindree');
             $table->integer('nombre_casques');
+            $table->longText('images_moto');
             $table->timestamps();
         });
     }

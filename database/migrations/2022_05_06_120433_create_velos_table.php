@@ -17,6 +17,7 @@ class CreateVelosTable extends Migration
             $table->increments('id');
             $table->string('marque');
             $table->string('taille');
+            $table->longText('images_velo');
             $table->timestamps();
         });
     }
